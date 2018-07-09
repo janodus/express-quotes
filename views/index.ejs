@@ -1,0 +1,19 @@
+<h1>Homepage GET request</h1>
+<p>This file was sent as a response to:
+<p><b>app.get('/')...</b>
+
+<form action="/quotes" method="POST">
+  <input type="text" placeholder="name" name="name">
+  <input type="text" placeholder="quote" name="quote">
+  <button type="submit">Submit</button>
+</form>
+
+<h1>Quotes in DB:</h1>
+<ul class="quotes">
+<% for(var i=0; i<quotes.length; i++) {%>
+  <li class="quote">
+    <span><%= quotes[i].name %> :</span>
+    <span><%= quotes[i].quote %></span>
+  </li>
+<% } %>
+</ul>

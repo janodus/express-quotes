@@ -17,13 +17,26 @@ MongoClient.connect('mongodb://janodus:shenmue1@ds229771.mlab.com:29771/quotepro
 })
 
 //list of middleware use functions here:
+app.set('view engine', 'ejs')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
 
+//==================================//
+//========== ROUTES HERE ===========//
+//==================================//
+
 app.get('/', function(req,res) {
-  //res.send("<h1>GET request from home found!</h1>");
-  res.sendFile(__dirname + '/index.html')
+  console.log('reached /');
+
+  //getting data from the database here:
+  var cursor = db.collection('quotes').find( { name : "Janodus" }).toArray(function(err, results) {
+    if(err) {console.log(err)}
+    console.log(results);
+    res.render('index.ejs', {quotes: results})
+  });
+
+  //res.sendFile(__dirname + '/index.html')
 });
 
 app.post('/quotes', function(req, res){
